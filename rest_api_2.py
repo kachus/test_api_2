@@ -23,7 +23,7 @@ class CarsList(Resource):
         list_available_cars.append(cars[i]['car_name'])
     app.logger.info(list_available_cars)
     if len(list_available_cars) == 0:
-      return 'No cars available', 400
+      return 'No cars available', 404
     return list_available_cars, 200
 
 class Car(Resource):
@@ -66,7 +66,8 @@ class CheckOut(Resource):
       return  'order was created', 201
     else:
       return 'car is not in stock', 404
-      #return 'all fields must be filled in'
+    
+      
 
 
 class OrdersList(Resource):
@@ -92,7 +93,7 @@ class Order(Resource):
       app.logger.info("order %s was deleted", deleted_order)
       return 'order was deleted', 200
     except:
-      return 'no such order in order', 400
+      return 'no such order in order', 404
 
 
 #cars[car_id]['amount'] += 1
@@ -109,15 +110,6 @@ api.add_resource(Order,'/orders/<order_id>')
 
 if __name__ == "__main__":
         app.run(debug=True)
-
-
-
-
-
-
-
-#basket = {678: {'car_name':'Kia Rio', 'price':'700000', 'dealer': 'dealer1','amount':1}}
-
 
 
 
