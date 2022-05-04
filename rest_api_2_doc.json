@@ -1,0 +1,93 @@
+/cars  
+GET
+возвращает список машин, которые есть в наличии 
+GET   http://127.0.0.1:5000/cars
+[
+    "Kia Rio",
+    "Ford Focus",
+    "Toyota Corola",
+    "Kia Rio"
+]
+
+/cars/<id>
+GET - возвращает информацию о машине по ее id 
+id - id машины
+GET  http://127.0.0.1:5000/cars/678
+{
+    "car_name": "Kia Rio",
+    "price": 700000,
+    "amount": 9,
+    "dealer": "dealer1"
+}
+
+
+/dealers
+GET 
+возвращает список диллеров
+GET http://127.0.0.1:5000/dealers
+
+[
+    "dealer1",
+    "dealer2",
+    "dealer3"
+]
+
+
+/dealers/<dealer>
+<dealer> - имя диллера
+GET 
+возвращает информацию о диллере 
+если диллера не существует - возвращает 404
+
+GET http://127.0.0.1:5000/dealers/dealer1
+"dealer info1"
+
+GET http://127.0.0.1:5000/dealers/dealer5
+"no such dealer"
+
+/orders
+GET
+возвращает список заказов и их детали 
+если заказов нет, возвращает 'you have no orders'
+{
+    "89": {
+        "user_name": "Zhenya",
+        "user_secondname": "Kach",
+        "car_id": 678
+    }
+}
+
+
+
+/orders/<order_id>
+order_id - уникальный id заказа (ORDER ID в таблице ORDERS)
+GET
+возвращает детали заказа по id
+если заказа с таким id нет, возвращает 404
+
+
+1) GET http://127.0.0.1:5000/orders/85
+{
+    "89": {
+        "user_name": "Zhenya",
+        "user_secondname": "Kach",
+        "car_id": 678
+    }
+}
+
+2) GET  http://127.0.0.1:5000/orders/1
+"no such order"
+
+
+
+DELETE
+удаляет заказ с данным id заказа, увеличивает количество машины, которая была в заказе,  на 1  (возвращает к исходному количеству)
+(подразумевается, что невозможно удалить несуществующий заказ, поэтому ошибка здесь не предусматривается)
+
+DELETE http://127.0.0.1:5000/orders/0a825596-c669-11ec-b6ca-600308aa8020
+204 (ОК)
+
+
+
+
+
